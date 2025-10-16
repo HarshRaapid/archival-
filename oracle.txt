@@ -81,3 +81,288 @@ project_mst
   -- user_saved_search (project_mst.id -> user_saved_search.project_id)
   -- raf_score (project_mst.PROJECT_ID -> raf_score.PROJECT_ID)
   -- compliance_gaps_popup_config (project_mst.id -> compliance_gaps_popup_config.project_id)
+
+
+
+  Of course. Here is the hierarchical representation of your database tables based on the foreign key relationships you provided.
+
+```
+project_mst
+  -- configuration_mst (project_mst.id -> configuration_mst.project_id)
+      --- configuration_mst_history (configuration_mst.id -> configuration_mst_history.configuration_mst_id)
+  -- compliance_gaps (project_mst.id -> compliance_gaps.project_id)
+      --- compliance_gaps_details (compliance_gaps.id -> compliance_gaps_details.compliance_gaps_id)
+      --- compliance_gaps_evidence_map (compliance_gaps.id -> compliance_gaps_evidence_map.compliance_gaps_id)
+  -- compliance_gaps_popup_config (project_mst.id -> compliance_gaps_popup_config.project_id)
+  -- configuration_mst_history (project_mst.id -> configuration_mst_history.project_id)
+  -- customer_report_download_log_project_mst_map (project_mst.id -> customer_report_download_log_project_mst_map.project_mst_id)
+  -- encounter_mst (project_mst.id -> encounter_mst.project_id)
+      --- cms_hcc_measure (encounter_mst.id -> cms_hcc_measure.encounter_id)
+          ---- cms_hcc_measure_code_detail (cms_hcc_measure.id -> cms_hcc_measure_code_detail.cms_hcc_measure_id)
+          ---- cms_hcc_measure_disease_interaction_map (cms_hcc_measure.id -> cms_hcc_measure_disease_interaction_map.cms_hcc_measure_id)
+      --- cm_code (encounter_mst.id -> cm_code.encounter_id)
+          ---- cm_code_cms_hcc_v28_group_map (cm_code.id -> cm_code_cms_hcc_v28_group_map.cm_code_id)
+          ---- cm_code_comment (cm_code.id -> cm_code_comment.cm_code_id)
+          
+          ---- cm_code_combination_map (cm_code.id -> cm_code_combination_map.cm_code_id)
+          ---- cm_code_evidence_map (cm_code.id -> cm_code_evidence_map.cm_code_id)
+          ---- cm_code_hcc_group_map (cm_code.id -> cm_code_hcc_group_map.cm_code_id)
+          ---- cm_code_hhs_hcc_group_map (cm_code.id -> cm_code_hhs_hcc_group_map.cm_code_id)
+          ---- cm_code_history (cm_code.id -> cm_code_history.cm_code_id)
+          ---- cm_code_meat_evidence_map (cm_code.id -> cm_code_meat_evidence_map.cm_code_id)
+          ---- cm_code_reject_reason_map (cm_code.id -> cm_code_reject_reason_map.cm_code_id)
+          ---- cm_code_rxhcc_hcc_group_map (cm_code.id -> cm_code_rxhcc_hcc_group_map.cm_code_id)
+          ---- cm_code_suppressed_cm_code_map (cm_code.id -> cm_code_suppressed_cm_code_map.cm_code_id)
+      --- claim_detail (encounter_mst.id -> claim_detail.encounter_id)
+          ---- claim_code_map (claim_detail.id -> claim_code_map.claim_detail_id)
+          ---- claim_procedure_code_map (claim_detail.id -> claim_procedure_code_map.claim_detail_id)
+      --- compliance_gaps (encounter_mst.id -> compliance_gaps.encounter_id)
+      --- compliance_gaps_popup_config (encounter_mst.id -> compliance_gaps_popup_config.encounter_id)
+      --- discussion_mst (encounter_mst.id -> discussion_mst.encounter_id)
+          ---- discussion_comment (discussion_mst.id -> discussion_comment.discussion_mst_id)
+          ---- discussion_user_map (discussion_mst.id -> discussion_user_map.discussion_mst_id)
+      --- document_mst (encounter_mst.id -> document_mst.encounter_id)
+          ---- document_code (document_mst.id -> document_code.document_id)
+          ---- document_demographic (document_mst.id -> document_demographic.document_id)
+          ---- document_dos (document_mst.id -> document_dos.document_id)
+          ---- document_evidence (document_mst.id -> document_evidence.document_id)
+          ---- document_page_detail (document_mst.id -> document_page_detail.document_id)
+          ---- document_processing_detail (document_mst.id -> document_processing_detail.document_id)
+          ---- document_review_map (document_mst.id -> document_review_map.document_id)
+          ---- document_section_map (document_mst.id -> document_section_map.document_id)
+          ---- document_sentence (document_mst.id -> document_sentence.document_id)
+          ---- encounter_dos_last_worked (document_dos.id -> encounter_dos_last_worked.document_dos_id)
+          ---- genai_processing_detail (document_mst.id -> genai_processing_detail.document_id)
+          ---- suggested_nonlegible_page_detail (document_mst.id -> suggested_nonlegible_page_detail.document_id)
+      --- encounter_cms_hcc_config_map (encounter_mst.id -> encounter_cms_hcc_config_map.encounter_id)
+      --- encounter_dos (encounter_mst.id -> encounter_dos.encounter_id)
+          ---- encounter_dos_comment (encounter_dos.id -> encounter_dos_comment.encounter_dos_id)
+          ---- encounter_dos_evidence_map (encounter_dos.id -> encounter_dos_evidence_map.encounter_dos_id)
+          ---- encounter_dos_last_worked (encounter_dos.id -> encounter_dos_last_worked.encounter_dos_id)
+          ---- encounter_dos_page_range_detail (encounter_dos.id -> encounter_dos_page_range_detail.encounter_dos_id)
+          ---- encounter_dos_reject_reason_map (encounter_dos.id -> encounter_dos_reject_reason_map.encounter_dos_id)
+          ---- encounter_dos_standard_comment (encounter_dos.id -> encounter_dos_standard_comment.encounter_dos_id)
+      --- encounter_dos_comment (encounter_mst.id -> encounter_dos_comment.encounter_id)
+      --- encounter_dos_last_worked (encounter_mst.id -> encounter_dos_last_worked.encounter_id)
+      --- encounter_dos_page_range_detail (encounter_mst.id -> encounter_dos_page_range_detail.encounter_id)
+      --- encounter_dos_standard_comment (encounter_mst.id -> encounter_dos_standard_comment.encounter_id)
+      --- encounter_event_map (encounter_mst.id -> encounter_event_map.encounter_id)
+      --- encounter_more_specific_less_specific_code_map (encounter_mst.id -> encounter_more_specific_less_specific_code_map.encounter_id)
+      --- encounter_nonlegible_page_detail (encounter_mst.id -> encounter_nonlegible_page_detail.encounter_id)
+          ---- encounter_nonlegible_page_user_map (encounter_nonlegible_page_detail.id -> encounter_nonlegible_page_user_map.encounter_nonlegible_page_detail_id)
+      --- encounter_status_map (encounter_mst.id -> encounter_status_map.encounter_id)
+          ---- encounter_status_map_history (encounter_status_map.id -> encounter_status_map_history.encounter_status_map_id)
+      --- encounter_status_map_history (encounter_mst.id -> encounter_status_map_history.encounter_id)
+      --- encounter_suppressed_hcc (encounter_mst.id -> encounter_suppressed_hcc.encounter_id)
+      --- encounter_trumped_hcc (encounter_mst.id -> encounter_trumped_hcc.encounter_id)
+      --- suggested_dos_page_range_detail (encounter_mst.id -> suggested_dos_page_range_detail.encounter_id)
+  -- project_hcc_model_map (project_mst.id -> project_hcc_model_map.project_id)
+  -- project_ocr_engine_map (project_mst.id -> project_ocr_engine_map.project_id)
+  -- project_compliance_config (project_mst.id -> project_compliance_config.project_id)
+  -- section_mst (project_mst.id -> section_mst.project_id)
+      --- document_section_map (section_mst.id -> document_section_map.section_mst_id)
+  -- user_project_landing_column_map (project_mst.id -> user_project_landing_column_map.project_id)
+  -- user_project_map (project_mst.id -> user_project_map.project_id)
+  -- user_saved_search (project_mst.id -> user_saved_search.project_id)
+```
+
+
+
+| TABLE_NAME                                     | REFERENCED_TABLE_NAME            | CONSTRAINT_NAME                                                |
++------------------------------------------------+----------------------------------+----------------------------------------------------------------+
+| bucket_encounter_status_map                    | bucket_mst                       | fk_bucket_encounter_status_map_bucket_id                       |
+| bucket_encounter_status_map                    | encounter_status_mst             | fk_bucket_encounter_status_map_encounter_status_id             |
+| bucket_mst                                     | bucket_mst                       | fk_bucket_mst_parent_id                                        |
+| claim_code_map                                 | claim_detail                     | fk_claim_code_map_claim_id                                     |
+| claim_code_map                                 | document_code                    | fk_claim_code_map_document_code_id                             |
+| claim_detail                                   | document_dos                     | fk_claim_detail_document_dos_id                                |
+| claim_detail                                   | encounter_mst                    | fk_claim_detail_encounter_mst                                  |
+| claim_procedure_code_map                       | claim_detail                     | fk_claim_procedure_code_map_claim_id                           |
+| client_mst                                     | user_logins                      | fk_client_mst_created_by                                       |
+| client_mst                                     | user_logins                      | fk_client_mst_updated_by                                       |
+| client_product_map                             | client_mst                       | fk_client_product_map_client_id                                |
+| client_product_map                             | user_logins                      | fk_client_product_map_created_by                               |
+| client_product_map                             | product_mst                      | fk_client_product_map_product_id                               |
+| client_product_map                             | user_logins                      | fk_client_product_map_updated_by                               |
+| cm_code                                        | claim_code_map                   | fk_cm_code_claim_code_id                                       |
+| cm_code                                        | document_code                    | fk_cm_code_document_code_id                                    |
+| cm_code                                        | encounter_dos                    | fk_cm_code_encounter_dos_id                                    |
+| cm_code                                        | encounter_mst                    | fk_cm_code_encounter_id                                        |
+| cm_code                                        | user_details                     | fk_cm_code_user_id                                             |
+| cm_code_cms_hcc_v28_group_map                  | cm_code                          | fk_cm_code_hccv28_group_map_cm_code_id                         |
+| cm_code_combination_map                        | cm_code                          | cm_code_combination_map_ibfk_1                                 |
+| cm_code_comment                                | cm_code                          | fk_cm_code_comment_cm_code_id                                  |
+| cm_code_evidence_map                           | cm_code                          | fk_cm_code_evidence_map_cm_code_id                             |
+| cm_code_evidence_map                           | document_evidence                | fk_cm_code_evidence_map_document_evidence_id                   |
+| cm_code_hcc_group_map                          | cm_code                          | fk_cm_code_hcc_group_map_cm_code_id                            |
+| cm_code_hhs_hcc_group_map                      | cm_code                          | fk_cm_code_hhs_group_map_cm_code_id                            |
+| cm_code_history                                | claim_code_map                   | fk_cm_code_history_claim_code_id                               |
+| cm_code_history                                | cm_code                          | fk_cm_code_history_cm_code_id                                  |
+| cm_code_history                                | document_code                    | fk_cm_code_history_document_code_id                            |
+| cm_code_history                                | encounter_dos                    | fk_cm_code_history_encounter_dos_id                            |
+| cm_code_history                                | encounter_mst                    | fk_cm_code_history_encounter_id                                |
+| cm_code_history                                | user_details                     | fk_cm_code_history_user_id                                     |
+| cm_code_meat_evidence_map                      | cm_code                          | fk_cm_code_meat_evidence_map_cm_code_id                        |
+| cm_code_meat_evidence_map                      | document_evidence                | fk_cm_code_meat_evidence_map_document_evidence_id              |
+| cm_code_reject_reason_map                      | cm_code                          | cm_code_reject_reason_map_ibfk_1                               |
+| cm_code_reject_reason_map                      | reject_reason_mst                | cm_code_reject_reason_map_ibfk_2                               |
+| cm_code_rxhcc_hcc_group_map                    | cm_code                          | fk_cm_code_rxhcc_group_map_cm_code_id                          |
+| cm_code_suppressed_cm_code_map                 | cm_code                          | cm_code_suppressed_cm_code_map_ibfk_1                          |
+| cm_code_suppressed_cm_code_map                 | cm_code                          | cm_code_suppressed_cm_code_map_ibfk_2                          |
+| cms_hcc_measure                                | encounter_mst                    | fk_cms_hcc_measure_encounter_id                                |
+| cms_hcc_measure                                | user_details                     | fk_cms_hcc_measure_user_id                                     |
+| cms_hcc_measure_code_detail                    | cms_hcc_measure                  | fk_cms_hcc_measure_code_detail_cms_hcc_measure_id              |
+| cms_hcc_measure_disease_interaction_map        | cms_hcc_measure                  | fk_cms_hcc_measure_disease_interaction_map_cms_hcc_measure_id  |
+| compliance_gaps                                | document_mst                     | fk_compliance_gaps_document_id                                 |
+| compliance_gaps                                | encounter_mst                    | fk_compliance_gaps_encounter_id                                |
+| compliance_gaps                                | project_mst                      | fk_compliance_gaps_project_id                                  |
+| compliance_gaps_details                        | compliance_gaps                  | fk_compliance_gaps_details_compliance_gaps_id                  |
+| compliance_gaps_evidence_map                   | compliance_gaps                  | compliance_gaps_evidence_map_ibfk_1                            |
+| compliance_gaps_evidence_map                   | document_evidence                | compliance_gaps_evidence_map_ibfk_2                            |
+| compliance_gaps_popup_config                   | document_mst                     | fk_compliance_gaps_popup_config_document_id                    |
+| compliance_gaps_popup_config                   | encounter_mst                    | fk_compliance_gaps_popup_config_encounter_id                   |
+| compliance_gaps_popup_config                   | project_mst                      | fk_compliance_gaps_popup_config_project_id                     |
+| compliance_gaps_popup_config                   | user_details                     | fk_compliance_gaps_popup_config_user_details_id                |
+| configuration_mst                              | project_mst                      | fk_configuration_mst_map_project_id                            |
+| configuration_mst_history                      | configuration_mst                | fk_configuration_mst_history_map_configuration_mst_id          |
+| configuration_mst_history                      | project_mst                      | fk_configuration_mst_history_map_project_id                    |
+| customer_report_download_log_project_mst_map   | project_mst                      | fk_report_download_log_project_map_project_id                  |
+| customer_report_download_log_project_mst_map   | customer_report_download_log     | fk_report_download_log_project_map_report_download_log_id      |
+| customer_report_procedure_column_map           | customer_report_procedure        | fk_customer_report_procedure_column_map_procedure_id           |
+| dashboard_client_map                           | dashboard_map                    | fk_dashboard_client_map_dashboard_id                           |
+| discussion_comment                             | discussion_mst                   | fk_discussion_comment_discussion_id                            |
+| discussion_comment                             | user_details                     | fk_discussion_comment_user_id                                  |
+| discussion_mst                                 | encounter_mst                    | fk_discussion_mst_encounter_id                                 |
+| discussion_mst                                 | user_details                     | fk_discussion_mst_user_id                                      |
+| discussion_user_map                            | discussion_mst                   | fk_discussion_user_map_discussion_id                           |
+| discussion_user_map                            | user_details                     | fk_discussion_user_map_user_id                                 |
+| document_code                                  | claim_code_map                   | document_code_ibfk_1                                           |
+| document_code                                  | claim_code_map                   | document_code_ibfk_2                                           |
+| document_code                                  | document_dos                     | fk_document_code_document_dos_id                               |
+| document_code                                  | document_mst                     | fk_document_code_document_id                                   |
+| document_code_cms_hcc_v28_group_map            | document_code                    | fk_document_code_hccv28_group_map_document_code_id             |
+| document_code_combination_map                  | document_code                    | fk_document_code_comment_document_code_id                      |
+| document_code_evidence_map                     | document_code                    | fk_document_code_evidence_map_document_code_id                 |
+| document_code_evidence_map                     | document_evidence                | fk_document_code_evidence_map_document_evidence_id             |
+| document_code_hcc_group_map                    | document_code                    | fk_document_code_hcc_group_map_document_code_id                |
+| document_code_hhs_hcc_group_map                | document_code                    | fk_document_code_hhs_group_map_document_code_id                |
+| document_code_meat_evidence_map                | document_code                    | fk_document_code_meat_evidence_map_document_code_id            |
+| document_code_meat_evidence_map                | document_evidence                | fk_document_code_meat_evidence_map_document_evidence_id        |
+| document_code_rxhcc_hcc_group_map              | document_code                    | fk_document_code_rxhcc_group_map_document_code_id              |
+| document_demographic                           | document_mst                     | fk_document_demographic_document_id                            |
+| document_dos                                   | document_mst                     | fk_document_dos_document_id                                    |
+| document_dos                                   | visit_type_mst                   | fk_document_dos_visit_type_id                                  |
+| document_dos_evidence_map                      | document_dos                     | fk_document_dos_evidence_mapdocument_dos_id                    |
+| document_dos_evidence_map                      | document_evidence                | fk_document_dos_evidence_map_document_evidence_id              |
+| document_evidence                              | document_mst                     | fk_document_evidence_document_id                               |
+| document_evidence                              | document_section_map             | fk_document_evidence_document_section_id                       |
+| document_evidence                              | document_sentence                | fk_document_evidence_document_sentence_id                      |
+| document_evidence_coordinates                  | document_evidence                | fk_document_evidence_coordinates_document_evidence_id          |
+| document_mst                                   | encounter_mst                    | fk_document_mst_encounter_id                                   |
+| document_page_detail                           | document_mst                     | fk_document_page_detail_document_id                            |
+| document_processing_detail                     | document_mst                     | fk_document_processing_detail_document_id                      |
+| document_review_map                            | document_mst                     | fk_document_review_map_document_id                             |
+| document_review_map                            | user_details                     | fk_document_review_map_user_id                                 |
+| document_section_map                           | document_mst                     | fk_document_section_map_document_id                            |
+| document_section_map                           | section_mst                      | fk_document_section_map_section_id                             |
+| document_sentence                              | document_mst                     | fk_document_sentence_document_id                               |
+| encounter_cms_hcc_config_map                   | encounter_mst                    | fk_encounter_cms_hcc_config_map_encounter_id                   |
+| encounter_dos                                  | document_dos                     | fk_encounter_dos_claim_doc_dos_id                              |
+| encounter_dos                                  | document_dos                     | fk_encounter_dos_document_dos_id                               |
+| encounter_dos                                  | encounter_mst                    | fk_encounter_dos_encounter_id                                  |
+| encounter_dos                                  | encounter_dos                    | fk_encounter_dos_original_dos_id                               |
+| encounter_dos                                  | user_details                     | fk_encounter_dos_user_id                                       |
+| encounter_dos                                  | visit_type_mst                   | fk_encounter_dos_visit_type_id                                 |
+| encounter_dos_comment                          | encounter_dos                    | fk_encounter_dos_comment_encounter_dos_id                      |
+| encounter_dos_comment                          | encounter_mst                    | fk_encounter_dos_comment_encounter_id                          |
+| encounter_dos_comment                          | user_details                     | fk_encounter_dos_comment_user_id                               |
+| encounter_dos_evidence_map                     | document_evidence                | fk_encounter_dos_evidence_map_document_evidence_id             |
+| encounter_dos_evidence_map                     | encounter_dos                    | fk_encounter_dos_evidence_map_encounter_dos_id                 |
+| encounter_dos_history                          | document_dos                     | fk_encounter_dos_history_document_dos_id                       |
+| encounter_dos_history                          | encounter_dos                    | fk_encounter_dos_history_encounter_dos_id                      |
+| encounter_dos_history                          | encounter_mst                    | fk_encounter_dos_history_encounter_id                          |
+| encounter_dos_history                          | encounter_dos                    | fk_encounter_dos_history_original_dos_id                       |
+| encounter_dos_history                          | user_details                     | fk_encounter_dos_history_user_id                               |
+| encounter_dos_history                          | visit_type_mst                   | fk_encounter_dos_history_visit_type_id                         |
+| encounter_dos_history                          | document_dos                     | fk_encounter_dos_history__claim_doc_dos_id                     |
+| encounter_dos_last_worked                      | encounter_dos                    | encounter_dos_last_worked_ibfk_1                               |
+| encounter_dos_last_worked                      | document_dos                     | encounter_dos_last_worked_ibfk_2                               |
+| encounter_dos_last_worked                      | user_details                     | encounter_dos_last_worked_ibfk_3                               |
+| encounter_dos_last_worked                      | encounter_mst                    | encounter_dos_last_worked_ibfk_4                               |
+| encounter_dos_page_range_detail                | document_dos                     | fk_encounter_dos_page_range_detail_document_dos_id             |
+| encounter_dos_page_range_detail                | encounter_dos                    | fk_encounter_dos_page_range_detail_encounter_dos_id            |
+| encounter_dos_page_range_detail                | encounter_mst                    | fk_encounter_dos_page_range_detail_encounter_id                |
+| encounter_dos_reject_reason_map                | dos_reject_reason_mst            | fk_dos_reject_map_dos_reject_reason_id                         |
+| encounter_dos_reject_reason_map                | encounter_dos                    | fk_dos_reject_map_encounter_dos_id                             |
+| encounter_dos_standard_comment                 | encounter_dos                    | fk_encounter_dos_standard_comment_encounter_dos_id             |
+| encounter_dos_standard_comment                 | encounter_mst                    | fk_encounter_dos_standard_comment_encounter_id                 |
+| encounter_dos_standard_comment                 | user_details                     | fk_encounter_dos_standard_comment_user_id                      |
+| encounter_event_map                            | encounter_mst                    | fk_encounter_event_map_encounter_id                            |
+| encounter_event_map                            | encounter_event_mst              | fk_encounter_event_map_event_id                                |
+| encounter_more_specific_less_specific_code_map | encounter_mst                    | encounter_more_specific_less_specific_code_map_ibfk_1          |
+| encounter_mst                                  | project_mst                      | fk_encounter_mst_project_id                                    |
+| encounter_nonlegible_page_detail               | document_mst                     | fk_encounter_nonlegible_page_detail_document_id                |
+| encounter_nonlegible_page_detail               | encounter_mst                    | fk_encounter_nonlegible_page_detail_encounter_id               |
+| encounter_nonlegible_page_detail               | suggested_nonlegible_page_detail | fk_encounter_nonlegible_page_detail_sug_nonleg_page_id         |
+| encounter_nonlegible_page_user_map             | encounter_nonlegible_page_detail | fk_encounter_nonlegible_page_user_map_enc_nl_page_id           |
+| encounter_nonlegible_page_user_map             | user_details                     | fk_encounter_nonlegible_page_user_map_user_id                  |
+| encounter_status_action_map                    | encounter_status_mst             | fk_encounter_status_action_map_destination_encounter_status_id |
+| encounter_status_action_map                    | encounter_status_mst             | fk_encounter_status_action_map_source_encounter_status_id      |
+| encounter_status_map                           | user_details                     | encounter_status_map_ibfk_1                                    |
+| encounter_status_map                           | encounter_mst                    | fk_encounter_status_map_encounter_id                           |
+| encounter_status_map                           | encounter_status_mst             | fk_encounter_status_map_encounter_status_id                    |
+| encounter_status_map_history                   | user_details                     | encounter_status_map_history_ibfk_1                            |
+| encounter_status_map_history                   | encounter_mst                    | fk_encounter_status_map_history_encounter_id                   |
+| encounter_status_map_history                   | encounter_status_mst             | fk_encounter_status_map_history_encounter_status_id            |
+| encounter_status_map_history                   | encounter_status_map             | fk_encounter_status_map_history_encounter_status_map_id        |
+| encounter_suppressed_hcc                       | encounter_mst                    | fk_enc_suppressed_hcc_encounter_id                             |
+| encounter_trumped_hcc                          | encounter_mst                    | fk_enc_trumped_hcc_encounter_id                                |
+| event_log                                      | user_logins                      | fk_event_log_created_by                                        |
+| event_log                                      | user_logins                      | fk_event_log_user_logins_id                                    |
+| genai_processing_detail                        | document_mst                     | fk_genai_processing_detail_document_id                         |
+| project_auto_accept_code_config                | auto_accept_code_config_mst      | fk_project_auto_accept_code_config_auto_accept_code_config_id  |
+| project_compliance_config                      | project_mst                      | fk_project_compliance_config_project_id                        |
+| project_hcc_model_map                          | project_mst                      | fk_project_hcc_model_map_project_id                            |
+| project_mst                                    | user_details                     | fk_project_mst_created_by                                      |
+| project_mst                                    | user_details                     | fk_project_mst_updated_by                                      |
+| project_ocr_engine_map                         | batch_model_detail               | fk_batch_model_detail                                          |
+| project_ocr_engine_map                         | batch_prompt_detail              | fk_batch_prompt_detail                                         |
+| project_ocr_engine_map                         | project_mst                      | fk_project_ocr_engine_map_project_id                           |
+| role_dashboard_permission_map                  | dashboard_permission_mst         | fk_role_dashboard_permission_map_dp_id                         |
+| role_dashboard_permission_map                  | role_mst                         | fk_role_dashboard_permission_map_role_id                       |
+| role_mst                                       | user_details                     | fk_role_mst_created_by                                         |
+| role_mst                                       | user_details                     | fk_role_mst_updated_by                                         |
+| role_permission_map                            | user_details                     | fk_role_permission_map_created_by                              |
+| role_permission_map                            | user_details                     | fk_role_permission_map_updated_by                              |
+| role_permission_map                            | permission_mst                   | fk_role_permission_map_user_permission_id                      |
+| role_permission_map                            | role_mst                         | fk_role_permission_map_user_role_id                            |
+| section_mst                                    | project_mst                      | fk_section_mst_project_id                                      |
+| suggested_dos_page_range_detail                | document_dos                     | fk_suggested_dos_page_range_detail_document_dos_id             |
+| suggested_dos_page_range_detail                | encounter_mst                    | fk_suggested_dos_page_range_detail_encounter_id                |
+| suggested_nonlegible_page_detail               | document_mst                     | fk_suggested_nonlegible_page_detail_document_id                |
+| user_details                                   | user_details                     | fk_user_details_created_by                                     |
+| user_details                                   | user_details                     | fk_user_details_updated_by                                     |
+| user_landing_page_column_map                   | landing_page_column_category_mst | fk_user_column_map_column_id                                   |
+| user_landing_page_column_map                   | user_details                     | fk_user_column_map_user_details_id                             |
+| user_logins                                    | client_mst                       | fk_user_logins_client_id                                       |
+| user_logins                                    | user_logins                      | fk_user_logins_created_by                                      |
+| user_logins                                    | user_logins                      | fk_user_logins_updated_by                                      |
+| user_password                                  | user_logins                      | fk_user_password_user_logins_id                                |
+| user_process_map                               | user_details                     | user_process_map_ibfk_1                                        |
+| user_product_map                               | user_logins                      | user_product_map_ibfk_1                                        |
+| user_product_map                               | product_mst                      | user_product_map_ibfk_2                                        |
+| user_project_landing_column_map                | landing_page_column_category_mst | fk_user_project_column_map_column_id                           |
+| user_project_landing_column_map                | project_mst                      | fk_user_project_column_map_project_id                          |
+| user_project_landing_column_map                | user_details                     | fk_user_project_column_map_user_details_id                     |
+| user_project_map                               | user_details                     | fk_user_project_map_user_details_id                            |
+| user_project_map                               | project_mst                      | fk_user_project_map_user_project_id                            |
+| user_resource_document_map                     | resource_document_mst            | fk_user_resource_document_mst_resource_document_id             |
+| user_role_map                                  | user_details                     | fk_user_role_map_created_by                                    |
+| user_role_map                                  | user_details                     | fk_user_role_map_updated_by                                    |
+| user_role_map                                  | user_details                     | fk_user_role_map_user_details_id                               |
+| user_role_map                                  | role_mst                         | fk_user_role_map_user_role_id                                  |
+| user_saved_search                              | user_details                     | fk_user_saved_search_created_by                                |
+| user_saved_search                              | project_mst                      | fk_user_saved_search_project_id                                |
+| user_saved_search                              | user_details                     | fk_user_saved_search_updated_by                                |
+| user_saved_search                              | user_details                     | fk_user_saved_search_user_id                                   |
+| visit_type_mst                                 | client_mst                       | fk_visit_type_mst_client_id                                    |
